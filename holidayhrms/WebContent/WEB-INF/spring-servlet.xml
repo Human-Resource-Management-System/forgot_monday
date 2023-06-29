@@ -117,6 +117,11 @@
     <bean id="rs" class="service.ReferenceServiceImpl" />
     <bean id="doc" class = "models.EmployeeRefDocuments"/>
    <bean id="empservice" class="service.EmployeeLoginService"/>
+     <bean id="mailService" class="service.OtpMailService" />
+         <bean id="forgotPassword" class="DAO.ForgotPasswordDAOImpl" autowire="byName"/>
+     
+   
+   
     
      <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <!-- Set the maximum allowed file size (in bytes) -->

@@ -339,13 +339,13 @@ span
                 <form id='login' class='input-group-login' action ="employee" method="POST">
                     <input type='text' id="empl_email" name ="empl_email" class='input-field'placeholder='Email Id' required >
 		    <input type='password'id="empl_password" name="empl_password" class='input-field'placeholder='Enter Password' required>
-		      <div class="forgot-password"> <a href="forgot.jsp">Forgot Password?</a></div>
+		      <div class="forgot-password"> <a href="forgot">Forgot Password?</a></div>
 		    <button type='submit'class='submit-btn' >Log in</button>
 		 </form>
 		 <form id='register' class='input-group-register' action ="admin" method="POST">
                     <input type='text'id="admin_email" name ="admin_email" class='input-field'placeholder='Email Id' required >
 		    <input type='password' id="admin_password"  name ="admin_password" class='input-field'placeholder='Enter Password' required>
-		    <div class="forgot-password a"> <a href="forgot.jsp">Forgot Password?</a></div>
+		    <div class="forgot-password a"> <a href="forgot">Forgot Password?</a></div>
 		    <button type='submit'class='submit-btn' >Log in</button>
 	         </form>
             </div>

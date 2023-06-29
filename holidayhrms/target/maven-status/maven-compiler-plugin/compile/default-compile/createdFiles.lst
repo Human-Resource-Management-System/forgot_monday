@@ -7,6 +7,7 @@ service\OfferLetterMailService.class
 DAO\HolidayDAOImpl.class
 service\ReferenceServiceImpl.class
 models\input\output\CandidateIO.class
+service\OtpMailService$1.class
 controllers\OfferLetterController.class
 DAO\EmployeeLeaveRequestDAOImpl.class
 service\EmployeeAttendanceService.class
@@ -23,6 +24,7 @@ DAO\EmploymentInductionDocDAOImpl.class
 models\EmployeeAttendance.class
 models\input\output\SaveInductioninput.class
 controllers\EmployeeController$6.class
+service_interfaces\MailService.class
 service\EmpService.class
 service\OfferLetterMailService$1.class
 controllers\EmployeeController$9.class
@@ -32,6 +34,7 @@ models\Employee.class
 controllers\EmployeeController$3.class
 models\Candidate.class
 controllers\AttendanceController.class
+service\OtpMailService.class
 models\InductionDocumentTypes.class
 models\Holiday.class
 service\EmployeeLeaveService.class
@@ -85,6 +88,7 @@ models\input\output\EmployeeParameterIO.class
 models\input\output\addinductionDOC.class
 DAO_Interfaces\EmployeeAttendanceDAO.class
 models\HRDepartment.class
+models\MailOtpModel.class
 models\input\output\EmployeePayRollOutputModel.class
 models\EmployeeLeaveModel.class
 service_interfaces\EmployeeLeaveServiceInterface.class
@@ -102,6 +106,7 @@ service\ReferenceServiceInterface.class
 models\EmployeeLeaveRequestId.class
 controllers\EmployeeController$1.class
 controllers\CandidateController.class
+models\PasswordModel.class
 models\EmployeeLeaveInputModel.class
 service\PaySlipMail.class
 service\PaySlipMail$2.class
