@@ -3,7 +3,12 @@ package models;
 public class MailOtpModel {
 
 	private String email;
+
 	private String otp;
+
+	MailOtpModel() {
+
+	}
 
 	@Override
 	public String toString() {
@@ -18,11 +23,11 @@ public class MailOtpModel {
 		this.email = email;
 	}
 
-	public int getOtp() {
-		return Integer.parseInt(otp.trim());
+	public String getOtp() {
+		return otp;
 	}
 
-	public void setOtp(String otp) {
-		this.otp = otp;
+	public void setOtp(String otp2) {
+		this.otp = otp2;
 	}
 }

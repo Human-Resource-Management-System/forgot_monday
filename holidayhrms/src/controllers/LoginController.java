@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import DAO.ForgotPasswordDAOImpl;
 import models.Employee;
+import models.EntityForgotPassword;
 import models.MailOtpModel;
 import service.EmployeeLoginService;
 import service_interfaces.MailService;
@@ -31,12 +32,15 @@ public class LoginController {
 	private MailService mailService;
 	private ForgotPasswordDAOImpl forgotPassword;
 
+	private EntityForgotPassword entityforgot;
+
 	@Autowired
 	public LoginController(EmployeeLoginService empservice, Employee empauto, MailService mailService,
-			ForgotPasswordDAOImpl forgotPassword) {
+			ForgotPasswordDAOImpl forgotPassword, EntityForgotPassword entityforgot) {
 		this.empservice = empservice;
 		this.mailService = mailService;
 		this.forgotPassword = forgotPassword;
+		this.entityforgot = entityforgot;
 
 	}
 
@@ -123,26 +127,35 @@ public class LoginController {
 		return "forgot";
 	}
 
-	@RequestMapping(value = "/sendmail", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@RequestMapping(value = "/sendOtpmail", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> handleEmailAjaxRequest(Model model, MailOtpModel mail) {
+		System.out.println("entered into handle email ajax methiod ");
 
 		System.out.println(mail.getEmail().trim());
-		System.out.println(mail);
+		// System.out.println(mail);
 
 		String email = mail.getEmail().trim();
+
+		System.out.println(email);
 		// Check whether the email exists
 		boolean emailExists = forgotPassword.checkEmailExists(email);
 
-		if (!emailExists) {
-			// Email does not exist, return an error response
+		if (!emailExists) { // Email does not exist, return an error response return
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email does not exist.");
 		}
 
 		// Email exists, continue with generating OTP and sending the email
 		int otp = (int) (Math.random() * 9000) + 1000;
-
+		mail.setOtp(Stringify(otp));
 		System.out.println(otp);
+		System.out.println(mail);
+		entityforgot.setMail(mail.getEmail().trim());
+		entityforgot.setOtp(mail.getOtp());
+
+		// Update or create the OTP entity
+		empservice.saveOrUpdate(entityforgot);
+
 		boolean flag = mailService.sendOtpMail(email, String.valueOf(otp));
 
 		if (flag)
@@ -150,6 +163,11 @@ public class LoginController {
 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
 
+	}
+
+	private String Stringify(int otp) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@RequestMapping(value = "/otpvalidate", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)

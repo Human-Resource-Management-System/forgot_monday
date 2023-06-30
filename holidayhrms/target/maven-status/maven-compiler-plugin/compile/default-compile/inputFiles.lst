@@ -25,6 +25,7 @@ C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\controllers\OfferLetterCont
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\input\output\EmploymentInductionDocumentViewModel.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\JobGrade.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\Candidate.java
+C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\EntityForgotPassword.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\EmploymentInductionDocument.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\service_interfaces\EmploymentInductionDocumentServiceInterface.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\DAO\EmploymentInductionDocDAOImpl.java
@@ -55,6 +56,7 @@ C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\service\HashGenerator.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\ApplyPermissions.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\DAO_Interfaces\EmployeeLeaveRequestDAO.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\EmployeeAttendance.java
+C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\DAO\ForgotPasswordDAOImpl.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\EmployeePayslipId.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\EmployeeLeaveRequest.java
 C:\Users\yahudhussain.s\git\HRMS_077\holidayhrms\src\models\input\output\addinductionDOC.java

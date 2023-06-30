@@ -116,9 +116,11 @@
     <bean id="rd" class="DAO.ReferenceDAOImpl" />
     <bean id="rs" class="service.ReferenceServiceImpl" />
     <bean id="doc" class = "models.EmployeeRefDocuments"/>
-   <bean id="empservice" class="service.EmployeeLoginService"/>
-     <bean id="mailService" class="service.OtpMailService" />
-         <bean id="forgotPassword" class="DAO.ForgotPasswordDAOImpl" autowire="byName"/>
+    <bean id="empservice" class="service.EmployeeLoginService"/>
+    <bean id="mailService" class="service.OtpMailService" />
+    <bean id="forgotPassword" class="DAO.ForgotPasswordDAOImpl" />
+    <bean id="entityforgot" class="models.EntityForgotPassword" autowire="byName" />
+             
      
    
    

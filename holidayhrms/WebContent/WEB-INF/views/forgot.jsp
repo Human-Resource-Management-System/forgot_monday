@@ -209,7 +209,6 @@ body {
 				<div id="password-error" class="error-msg"></div>
 			</form>
 		</div>
-	</div>
 
 
 	<script>
@@ -271,8 +270,8 @@ body {
         
        // ajax call to send otp to the registered email
       $.ajax({
-        url: "sendmail",
-        type: "POST",
+        url: "sendOtpmail",
+        type: "GET",
         data: $("#myform").serialize(),
         contentType: "application/x-www-form-urlencoded",
         success: function(response) {
@@ -397,7 +396,7 @@ body {
 
                            // Redirect to index.jsp after 2 seconds
                            setTimeout(function() {
-                             window.location.href = "index.jsp";
+                             window.location.href = "login.jsp";
                            }, 2000);
                             
 

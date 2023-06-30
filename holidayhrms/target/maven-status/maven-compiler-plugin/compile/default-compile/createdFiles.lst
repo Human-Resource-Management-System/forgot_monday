@@ -24,6 +24,7 @@ DAO\EmploymentInductionDocDAOImpl.class
 models\EmployeeAttendance.class
 models\input\output\SaveInductioninput.class
 controllers\EmployeeController$6.class
+models\EntityForgotPassword.class
 service_interfaces\MailService.class
 service\EmpService.class
 service\OfferLetterMailService$1.class
@@ -82,6 +83,7 @@ service_interfaces\EmploymentInductionServiceInterface.class
 controllers\EmployeeController.class
 controllers\ReferenceDocumentController.class
 controllers\PermissionsController.class
+DAO\ForgotPasswordDAOImpl.class
 models\HrmsEmploymentOffer.class
 models\EmployeePayslip.class
 models\input\output\EmployeeParameterIO.class

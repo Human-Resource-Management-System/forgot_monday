@@ -61,5 +61,24 @@ public class EmpDAO {
 			return null;
 		}
 	}
+	/*
+	 * public boolean checkEmailExists(String email) { String query =
+	 * "SELECT COUNT(e) FROM Employee e WHERE e.emplOffemail = :email"; Long count = em.createQuery(query,
+	 * Long.class).setParameter("email", email).getSingleResult(); return count > 0; }
+	 * 
+	 * 
+	 * public EntityForgotPassword findByEmail(String email) { return entityManager.find(EntityForgotPassword.class,
+	 * email); }
+	 * 
+	 * 
+	 * public boolean findEmail(String email) { System.out.println(email + "email at dao");
+	 * 
+	 * String query = "SELECT COUNT(e) FROM EntityForgotPassword e WHERE e.email = :email"; Long count =
+	 * em.createQuery(query, Long.class).setParameter("email", email).getSingleResult(); return count > 0; }
+	 * 
+	 * public void save(EntityForgotPassword otpEntity) { em.persist(otpEntity); }
+	 * 
+	 * public void update(EntityForgotPassword otpEntity) { em.merge(otpEntity); }
+	 */
 
 }

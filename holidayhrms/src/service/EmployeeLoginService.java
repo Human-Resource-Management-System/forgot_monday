@@ -5,14 +5,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import DAO.EmpDAO;
+import DAO.ForgotPasswordDAOImpl;
 import models.Admin;
 import models.Employee;
+import models.EntityForgotPassword;
 
 @Component
 public class EmployeeLoginService {
 
-	@Autowired
 	private EmpDAO empdao;
+	private ForgotPasswordDAOImpl forgotPassword;
+
+	@Autowired
+	EmployeeLoginService(ForgotPasswordDAOImpl forgotPassword, EmpDAO empdao) {
+		this.forgotPassword = forgotPassword;
+		this.empdao = empdao;
+	}
 
 	@Transactional
 	public Employee getByEmail(String email) {
@@ -63,4 +71,21 @@ public class EmployeeLoginService {
 		return null;
 	}
 
+	@Transactional
+	public void saveOrUpdate(EntityForgotPassword otpEntity) {
+		String email = otpEntity.getMail();
+		System.out.println(otpEntity + "in service ");
+
+		boolean emailExists = forgotPassword.findEmail(email);
+		System.out.println(emailExists);
+		if (emailExists) {
+			// Email does not exist, return an error response return
+			forgotPassword.update(otpEntity);
+		}
+
+		else {
+
+			forgotPassword.save(otpEntity);
+		}
+	}
 }
