@@ -147,9 +147,9 @@ public class LoginController {
 
 		// Email exists, continue with generating OTP and sending the email
 		int otp = (int) (Math.random() * 9000) + 1000;
-		mail.setOtp(Stringify(otp));
+		mail.setOtp(String.valueOf(otp));
 		System.out.println(otp);
-		System.out.println(mail);
+		System.out.println(mail + "this isn mail");
 		entityforgot.setMail(mail.getEmail().trim());
 		entityforgot.setOtp(mail.getOtp());
 
