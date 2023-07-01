@@ -216,7 +216,8 @@ body {
   var timerInterval;
   var remainingTime = 120; // 2 minutes in seconds
   var otpValidated = false;
-  
+  var emailValue = "";
+
   
   function startTimer() {
     timerInterval = setInterval(updateTimer, 1000); // Update the timer every second
@@ -256,7 +257,7 @@ body {
     	
     	var email = $("#mail").val();
         var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-
+        emailValue = email;
         if (!emailPattern.test(email)) {
           $("#msg").html("Invalid email address. Please enter a valid email.")
                   .removeClass("success-msg")
@@ -266,7 +267,7 @@ body {
         }
     	
         // email data
-        console.log($("#myform").serialize())
+        console.log($("#myform").serialize()+"-check here")
         
        // ajax call to send otp to the registered email
       $.ajax({
@@ -385,7 +386,7 @@ body {
                         $.ajax({
                         url: "changepassword",
                         type: "POST",
-                        data: $("#myform").serialize(),
+                        data: $("#myform").serialize() + "&emplOffemail=" + encodeURIComponent(emailValue),
                         contentType: "application/x-www-form-urlencoded",
                         success: function(response) {
                         	 var successMessage = $("<div>")
@@ -394,7 +395,7 @@ body {
 
                            $("#container").empty().append(successMessage);
 
-                           // Redirect to index.jsp after 2 seconds
+                           // Redirect to login.jsp after 2 seconds
                            setTimeout(function() {
                              window.location.href = "login.jsp";
                            }, 2000);
@@ -426,7 +427,7 @@ body {
                    $("#container").empty().append(errorMessage);
                      
                      setTimeout(function() {
-                         window.location.href = "index.jsp";
+                         window.location.href = "login.jsp";
                        }, 2000);
                 }
               });

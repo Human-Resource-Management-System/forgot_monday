@@ -173,16 +173,29 @@ public class LoginController {
 	@RequestMapping(value = "/otpvalidate", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	@ResponseBody
 	public ResponseEntity<String> handleOTPAjaxRequest(Model mod, MailOtpModel mail) {
-		System.out.println("In here");
-		return ResponseEntity.ok("otp verification ");
+
+		System.out.println(mail.getOtp() + "at otp coming from form ");
+		String email = mail.getEmail().trim();
+
+		String flagotpvalid = forgotPassword.validateOtp(email);
+		System.out.println(flagotpvalid + "otp coming from data base ");
+		if (flagotpvalid.equals(mail.getOtp()))
+			return ResponseEntity.ok("otp verification ");
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("otp is not correct.");
 	}
 
 	@RequestMapping(value = "/changepassword", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	@ResponseBody
-	public ResponseEntity<String> changePasswordAjaxRequest(Model mod) {
-		System.out.println("In here");
-
+	public ResponseEntity<String> changePasswordAjaxRequest(Model mod, Employee emp) {
+		System.out.println(emp.getPassword() + "came in controller ");
+		System.out.println(emp.getEmplOffemail());
+		System.out.println(empservice.hashPassword(emp.getPassword()));
+		emp.setPassword(empservice.hashPassword(emp.getPassword()));
+		System.out.println("In change password haha ");
+		forgotPassword.updatePassword(emp);
 		return ResponseEntity.ok("Password change");
+
 	}
 
 }
