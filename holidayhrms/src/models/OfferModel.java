@@ -98,4 +98,9 @@ public class OfferModel {
 	public void setCandidateId(String candidateId) {
 		this.candidateId = candidateId;
 	}
+
+	public void setDocuments(String string) {
+		// TODO Auto-generated method stub
+
+	}
 }

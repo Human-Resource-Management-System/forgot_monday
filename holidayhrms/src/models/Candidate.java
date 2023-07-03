@@ -53,6 +53,14 @@ public class Candidate {
 
 	// Getters and setters
 
+	public Candidate(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Candidate() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getCandId() {
 		return candId;
 	}

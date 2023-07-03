@@ -31,7 +31,6 @@ public class LoginController {
 	private EmployeeLoginService empservice;
 	private MailService mailService;
 	private ForgotPasswordDAOImpl forgotPassword;
-
 	private EntityForgotPassword entityforgot;
 
 	@Autowired

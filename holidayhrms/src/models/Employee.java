@@ -148,6 +148,10 @@ public class Employee {
 
 	// Getters and setters
 
+	public Employee(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getEmplId() {
 		return emplId;
 	}

@@ -24,6 +24,7 @@ import models.Employee;
 import models.HrmsEmploymentOffer;
 import models.OfferModel;
 import service.OfferLetterMailService;
+import service.OfferLetterService;
 
 @Controller
 public class OfferLetterController {
@@ -32,10 +33,12 @@ public class OfferLetterController {
 
 	private OfferLetterDAO offerLetterDAO;
 	private OfferModel of;
+	private OfferLetterService offerservice;
 
 	@Autowired
-	public OfferLetterController(OfferLetterDAO offerLetterDAO) {
+	public OfferLetterController(OfferLetterDAO offerLetterDAO, OfferLetterService offerservice) {
 		this.offerLetterDAO = offerLetterDAO;
+		this.offerservice = offerservice;
 	}
 
 	// getting data of candidates whose offerletters are already provided
@@ -132,7 +135,7 @@ public class OfferLetterController {
 		offerLetterDAO.insertEofrInto(eofr);
 		logger.info("inserting data into HrmsEmploymentOffer here by calling dao method");
 
-		offerLetterDAO.updateEmploymentOfferDocuments(eofr, of);
+		offerservice.updateEmploymentOfferDocuments(eofr, of);
 		logger.info("inserting into  employmentofferdocuemnts table");
 
 		offerLetterDAO.updateCandidateStatus("cand_status", "AC");

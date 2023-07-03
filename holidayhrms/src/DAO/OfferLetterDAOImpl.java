@@ -15,11 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import DAO_Interfaces.OfferLetterDAO;
 import models.Candidate;
 import models.Employee;
-import models.EmploymentOfferDocComposite;
 import models.EmploymentOfferDocument;
 import models.HrmsEmploymentOffer;
 import models.InductionDocumentTypes;
-import models.OfferModel;
 
 public class OfferLetterDAOImpl implements OfferLetterDAO {
 
@@ -116,43 +114,14 @@ public class OfferLetterDAOImpl implements OfferLetterDAO {
 	// to insert offerId, docIndex,IdtyId of the particular candidate in employment offers documents
 
 	@Override
+
 	@Transactional
-	public void updateEmploymentOfferDocuments(HrmsEmploymentOffer employmentOfferModel, OfferModel of) {
+	public void updateEmploymentOfferDocuments(EmploymentOfferDocument employmentofferdoc) {
 
-		System.out.println("in here");
-		// getting eofrId
-		int eofrId = employmentOfferModel.getCandidateId();
-		// getting the list of documents should bring by candidate
-		List<String> documentsToBring = of.getDocuments();
-
-		System.out.println(documentsToBring);
-		// setting inductionDocumentTypes model from inductionDocumentTypes table
-		List<InductionDocumentTypes> inductionDocuments = getInductionDocuments();
-
-		System.out.println(inductionDocuments);
-		int docIndex = 1;
-		for (String document : documentsToBring) {
-			// getting IdtyId by the document name
-			int idtyId = findIdtyIdByTitle(inductionDocuments, document);
-			// these four steps is for assigning eofrId,docIndex,idtyId to the employmentofferdocuments entity model
-
-			EmploymentOfferDocComposite empoffdocComposite = context.getBean(EmploymentOfferDocComposite.class);
-			EmploymentOfferDocument employmentofferdocument = context.getBean(EmploymentOfferDocument.class);
-
-			empoffdocComposite.setOfferid(eofrId);
-			empoffdocComposite.setDocumentIndex(docIndex);
-			employmentofferdocument.setEmpoff(empoffdocComposite);
-			employmentofferdocument.setOfferidentity(idtyId);
-			// EmploymentOfferDocument documentModel = new EmploymentOfferDocument(empoffdocComposite, idtyId);
-
-			System.out.println(employmentofferdocument);
-			// update the data into data base which got from entity model of employmentofferdocuments
-			entityManager.persist(employmentofferdocument);
-			docIndex++;
-		}
+		entityManager.persist(employmentofferdoc);
 	}
 
-	private List<InductionDocumentTypes> getInductionDocuments() {
+	public List<InductionDocumentTypes> getInductionDocuments() {
 		logger.info("Fetching inductionDocumentTypes from the database");
 
 		TypedQuery<InductionDocumentTypes> query = entityManager.createQuery("SELECT d FROM InductionDocumentTypes d",
@@ -161,7 +130,7 @@ public class OfferLetterDAOImpl implements OfferLetterDAO {
 	}
 
 	// getting IdtyId by the document name
-	private int findIdtyIdByTitle(List<InductionDocumentTypes> inductionDocuments, String title) {
+	public int findIdtyIdByTitle(List<InductionDocumentTypes> inductionDocuments, String title) {
 		logger.info("Finding IdtyId by title: " + title);
 		for (InductionDocumentTypes document : inductionDocuments) {
 			if (document.getIdtyTitle().equalsIgnoreCase(title)) {

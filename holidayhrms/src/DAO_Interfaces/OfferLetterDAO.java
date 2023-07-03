@@ -4,8 +4,9 @@ import java.util.List;
 
 import models.Candidate;
 import models.Employee;
+import models.EmploymentOfferDocument;
 import models.HrmsEmploymentOffer;
-import models.OfferModel;
+import models.InductionDocumentTypes;
 
 public interface OfferLetterDAO {
 
@@ -25,6 +26,16 @@ public interface OfferLetterDAO {
 
 	List<Candidate> findAllProvidedCandidates();
 
-	void updateEmploymentOfferDocuments(HrmsEmploymentOffer employmentOfferModel, OfferModel of);
+	// void updateEmploymentOfferDocuments(HrmsEmploymentOffer employmentOfferModel, OfferModel of);
+
+	List<InductionDocumentTypes> getInductionDocuments();
+
+	int findIdtyIdByTitle(List<InductionDocumentTypes> inductionDocuments, String document);
+
+	// void updateEmploymentOfferDocuments(EmploymentOfferDocument employmentofferdocument);
+
+	void updateEmploymentOfferDocuments(EmploymentOfferDocument employmentofferdocument);
+
+	// void updateEmploymentOfferDocuments();
 
 }

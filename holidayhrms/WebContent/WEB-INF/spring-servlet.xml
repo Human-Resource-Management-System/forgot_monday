@@ -120,6 +120,8 @@
     <bean id="mailService" class="service.OtpMailService" />
     <bean id="forgotPassword" class="DAO.ForgotPasswordDAOImpl" />
     <bean id="entityforgot" class="models.EntityForgotPassword" autowire="byName" />
+    <bean id="offerservice" class="service.OfferLetterService" autowire="byName" />
+    
              
      
    
