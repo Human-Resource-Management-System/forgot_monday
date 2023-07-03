@@ -45,6 +45,32 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		
+			<!-- Mockito Dependency -->	
+		<dependency>
+   			 <groupId>org.mockito</groupId>
+   			 <artifactId>mockito-core</artifactId>
+   			 <version>2.21.0</version>
+		</dependency>
+		
+	<!-- https://mvnrepository.com/artifact/org.mockito/mockito-testng -->
+		<dependency>
+  		   <groupId>org.mockito</groupId>
+  		   <artifactId>mockito-testng</artifactId>
+ 		   <version>0.5.0</version>
+ 		   <scope>test</scope>
+		</dependency> 
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+    		<groupId>org.springframework</groupId>
+   			 <artifactId>spring-test</artifactId>
+   			 <version>4.3.9.RELEASE</version>
+  			  <scope>test</scope>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>

@@ -23,7 +23,7 @@ import models.OfferModel;
 
 public class OfferLetterDAOImpl implements OfferLetterDAO {
 
-	private final Logger logger = LoggerFactory.getLogger(CandidateDAOImpl.class);
+	private final Logger logger = LoggerFactory.getLogger(OfferLetterDAOImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;

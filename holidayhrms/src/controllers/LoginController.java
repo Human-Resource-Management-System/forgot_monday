@@ -49,18 +49,20 @@ public class LoginController {
 
 		logger.info("Login Page Requested");
 		logger.warn("testing...");
-		logger.error("heloo");
 		return "login";
 	}
 
 	@RequestMapping(value = "/employee", method = RequestMethod.POST)
 	public String enterIntoMenu_employee(@RequestParam("empl_email") String email,
 			@RequestParam("empl_password") String password, HttpServletRequest request) {
-
+		logger.info("Employee Login Requested");
+		logger.debug("Employee email: {}", email);
+		logger.debug("Employee password: {}", password);
 		HttpSession session = request.getSession(true);
 		System.out.println("this is employee side ");
 
 		if (empservice.authenticateUser(email, password)) {
+			logger.info("Employee login successful");
 
 			// Set employee ID in session
 			Employee empdetails = empservice.getByEmail(email);
@@ -68,6 +70,8 @@ public class LoginController {
 			session.setAttribute("employeeId", employeeId);
 			return "index2"; // Redirect to the dashboard page
 		} else {
+			logger.warn("Invalid employee login");
+
 			return "login";
 		}
 	}
@@ -75,10 +79,15 @@ public class LoginController {
 	@RequestMapping(value = "/admin", method = RequestMethod.POST)
 	public String enterIntoMenu_admin(@RequestParam("admin_email") String email,
 			@RequestParam("admin_password") String password, HttpServletRequest request) {
+		logger.info("Admin Login Requested");
+		logger.debug("Admin email: {}", email);
+		logger.debug("Admin password: {}", password);
+
 		System.out.println("this is admin side ");
 
 		HttpSession session = request.getSession(true);
 		if (empservice.authenticateUser_admin(email, password)) {
+			logger.info("Admin login successful");
 
 			// Set employee ID in session
 			Employee empdetails = empservice.getByEmail(email);
@@ -89,34 +98,17 @@ public class LoginController {
 
 			return "Index_admin"; // Redirect to the dashboard page
 		} else {
+			logger.warn("Invalid admin login");
+
 			return "login";
 		}
-	}
-
-	@RequestMapping(value = "/checkingSession", method = RequestMethod.GET)
-	public void getAllDetailsEmploye(HttpSession session) {
-
-		if (session.getAttribute("adminId") == null)
-			System.out.println("no admin login");
-		else {
-			System.out.println("admin login");
-			int employeeid = (int) session.getAttribute("adminId");
-			System.out.println(employeeid);
-		}
-		if (session.getAttribute("employeeId") == null)
-			System.out.println("no employee login");
-		else {
-			System.out.println("employee login");
-			int adminid = (int) session.getAttribute("employeeId");
-			System.out.println(adminid);
-		}
-
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ResponseEntity<String> logout(HttpSession session) {
 		session.invalidate();
 		System.out.println("logout");
+		logger.info("Logout Requested");
 
 		return ResponseEntity.ok("success");
 	}
@@ -124,6 +116,8 @@ public class LoginController {
 	@RequestMapping(value = "/forgot", method = RequestMethod.GET)
 	public String myControllerMethod() {
 		// Controller logic
+		logger.info("Forgot Password Page Requested");
+
 		return "forgot";
 	}
 
@@ -131,7 +125,8 @@ public class LoginController {
 	@ResponseBody
 	public ResponseEntity<String> handleEmailAjaxRequest(Model model, MailOtpModel mail) {
 		System.out.println("entered into handle email ajax methiod ");
-
+		logger.info("Send OTP Mail Requested");
+		logger.debug("Email: {}", mail.getEmail().trim());
 		System.out.println(mail.getEmail().trim());
 		// System.out.println(mail);
 
@@ -142,6 +137,8 @@ public class LoginController {
 		boolean emailExists = forgotPassword.checkEmailExists(email);
 
 		if (!emailExists) { // Email does not exist, return an error response return
+			logger.warn("Email does not exist");
+
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email does not exist.");
 		}
 
@@ -158,29 +155,33 @@ public class LoginController {
 
 		boolean flag = mailService.sendOtpMail(email, String.valueOf(otp));
 
-		if (flag)
+		if (flag) {
+			logger.info("OTP Email sent successfully");
+
 			return ResponseEntity.ok("Email Successfully sent!");
+		}
+		logger.error("Error sending OTP email");
 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
 
 	}
 
-	private String Stringify(int otp) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@RequestMapping(value = "/otpvalidate", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	@ResponseBody
 	public ResponseEntity<String> handleOTPAjaxRequest(Model mod, MailOtpModel mail) {
-
+		logger.info("OTP Validation Requested");
+		logger.debug("OTP: {}", mail.getOtp());
 		System.out.println(mail.getOtp() + "at otp coming from form ");
 		String email = mail.getEmail().trim();
 
 		String flagotpvalid = forgotPassword.validateOtp(email);
 		System.out.println(flagotpvalid + "otp coming from data base ");
-		if (flagotpvalid.equals(mail.getOtp()))
+		if (flagotpvalid.equals(mail.getOtp())) {
+			logger.info("OTP verification successful");
+
 			return ResponseEntity.ok("otp verification ");
+		}
+		logger.warn("Invalid OTP");
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("otp is not correct.");
 	}
@@ -191,9 +192,16 @@ public class LoginController {
 		System.out.println(emp.getPassword() + "came in controller ");
 		System.out.println(emp.getEmplOffemail());
 		System.out.println(empservice.hashPassword(emp.getPassword()));
+
+		logger.info("Change Password Requested");
+		logger.debug("New Password: {}", emp.getPassword());
+		logger.debug("Employee Office Email: {}", emp.getEmplOffemail());
+
 		emp.setPassword(empservice.hashPassword(emp.getPassword()));
 		System.out.println("In change password haha ");
 		forgotPassword.updatePassword(emp);
+		logger.info("Password changed successfully");
+
 		return ResponseEntity.ok("Password change");
 
 	}
